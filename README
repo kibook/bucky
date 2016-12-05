@@ -1,0 +1,31 @@
+Bucky is a CGI-based Gopher <-> HTTP proxy utility for the Bucktooth
+Gopher server. It runs on top of an existing HTTP server to provide
+access to your Bucktooth Gopherhole via HTTP.
+
+Bucky uses buckd's -isproxy feature rather than opening sockets
+and connecting to buckd like a gopher client.
+
+It takes a QUERY_STRING in the form of "#/SELECTOR", where # is
+the Gopher item type of the resource. For resources like menus or
+search results, it builds an HTML version.
+
+Running as a normal CGI script, requests may look like:
+
+  http://mysite.com/bucky.cgi?0/mytextfile.txt
+
+which would request /mytextfile.txt from the Gopher server,
+displaying it in plain text. If your HTTP server can "rewrite"
+requests (such as Apache's mod_rewrite), Bucky can be told to
+masquerade links appropriately such that Gopher-URI-like requests are
+handled by the Gopher server and Bucky transparently. For example:
+
+  http://mysite.com/0/mytextfile.txt
+
+could be accompished under Apache mod_rewrite with rules like:
+
+  RewriteRule "^/$" "/bucky.cgi"
+  RewriteRule "^/(.)/(.*)$" "/bucky.cgi?$1/$2"
+
+and USE_REWRITE + REWRITE_ROOT will tell Bucky how to build
+appropriate URLs for all links. (see comments under USE_REWRITE and
+REWRITE_ROOT in config.h)
