@@ -4,6 +4,10 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include <sys/socket.h>
+#include <netdb.h>
+#include <resolv.h>
+
 #include "gopher.h"
 #include "config.h"
 
@@ -390,6 +394,29 @@ FILE *popen_buckd(char *req)
 	return popen(com, "r");
 }
 
+FILE *open_socket(char *req)
+{
+	int sockfd;
+	struct sockaddr_in addr;
+	struct hostent *server;
+
+	sockfd = socket(AF_INET, SOCK_STREAM, 0);
+
+	server = gethostbyname(MY_HOST);
+
+	addr.sin_family = AF_INET;
+	addr.sin_port = htons(MY_PORT);
+
+	bcopy(server->h_addr, &addr.sin_addr.s_addr, server->h_length);
+
+	connect(sockfd, (struct sockaddr *) &addr, sizeof(addr));
+
+	write(sockfd, req, strlen(req));
+	write(sockfd, "\r\n", 2);
+
+	return fdopen(sockfd, "r");
+}
+
 int main(void)
 {
 	char *query_string, *type, *selector, *search_res, *search_q;
@@ -418,12 +445,18 @@ int main(void)
 	if (!type) type = "1";
 	if (!selector) selector = "/";
 
-	/* buckd's -proxy flag takes a hex-encoded selector */
-	hexstrcpy(hs, selector);
+	#ifdef USE_SOCKETS
+		fp = open_socket(selector);
+		handle_buckd(fp, *type, selector);
+		fclose(fp);
+	#else
+		/* buckd's -proxy flag takes a hex-encoded selector */
+		hexstrcpy(hs, selector);
 
-	fp = popen_buckd(hs);
-	handle_buckd(fp, *type, selector);
-	pclose(fp);
+		fp = popen_buckd(hs);
+		handle_buckd(fp, *type, selector);
+		pclose(fp);
+	#endif
 	
 	return 0;
 }

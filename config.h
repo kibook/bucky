@@ -13,6 +13,9 @@
 /* Hostname of your Gopher server (must match buckd's $MYHOST, does
  * NOT need to match the hostname of the HTTP server!) */
 #define MY_HOST "khzai.net"
+#define MY_PORT 70
+
+#define USE_SOCKETS
 
 /* Path to Bucktooth daemon */
 #define BUCKD "/usr/local/bin/buckd"
