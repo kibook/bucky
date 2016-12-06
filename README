@@ -25,8 +25,8 @@ handled by the Gopher server and Bucky transparently. For example:
 
 could be accompished under Apache mod_rewrite with rules like:
 
-  RewriteRule "^/$" "/bucky.cgi" RewriteRule "^/(.)/(.*)$"
-  "/bucky.cgi?$1/$2"
+  RewriteRule "^/$" "/bucky.cgi"
+  RewriteRule "^/(.)/(.*)$" "/bucky.cgi?$1/$2"
 
 and USE_REWRITE + REWRITE_ROOT will tell Bucky how to build
 appropriate URLs for all links. (see comments under USE_REWRITE
