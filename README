@@ -1,9 +1,11 @@
-Bucky is a CGI-based Gopher <-> HTTP proxy utility for the Bucktooth
-Gopher server. It runs on top of an existing HTTP server to provide
-access to your Bucktooth Gopherhole via HTTP.
+Bucky is a CGI-based Gopher <-> HTTP proxy utility, primarily for
+the Bucktooth Gopher server. It runs on top of an existing HTTP
+server to provide access to your Bucktooth Gopherhole via HTTP.
 
-Bucky uses buckd's -isproxy feature rather than opening sockets
-and connecting to buckd like a gopher client.
+Bucky may use buckd's -isproxy feature rather than opening sockets
+and connecting to buckd like a gopher client, however it may also
+connect over sockets, and thus is compatible with other Gopher
+servers as well.
 
 It takes a QUERY_STRING in the form of "#/SELECTOR", where # is
 the Gopher item type of the resource. For resources like menus or
@@ -23,9 +25,9 @@ handled by the Gopher server and Bucky transparently. For example:
 
 could be accompished under Apache mod_rewrite with rules like:
 
-  RewriteRule "^/$" "/bucky.cgi"
-  RewriteRule "^/(.)/(.*)$" "/bucky.cgi?$1/$2"
+  RewriteRule "^/$" "/bucky.cgi" RewriteRule "^/(.)/(.*)$"
+  "/bucky.cgi?$1/$2"
 
 and USE_REWRITE + REWRITE_ROOT will tell Bucky how to build
-appropriate URLs for all links. (see comments under USE_REWRITE and
-REWRITE_ROOT in config.h)
+appropriate URLs for all links. (see comments under USE_REWRITE
+and REWRITE_ROOT in config.h)
