@@ -32,8 +32,11 @@
  *
  * Therefore, even when using Bucktooth, enabling sockets may be desirable.
  *
- * If you do not need this functionality, leave this undefined to make use
- * of Bucktooth's -isproxy feature instead.
+ * If you do not need this functionality, leave this undefined to make
+ * use of Bucktooth's -isproxy feature instead. The benefits of NOT
+ * using sockets, besides the obvious, include the Gopher server seeing
+ * individual IPs of proxy users, otherwise they will all appear as the
+ * server the proxy is running on.
  */
 #define USE_SOCKETS
 
