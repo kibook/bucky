@@ -11,10 +11,30 @@
  */
 
 /* Hostname of your Gopher server (must match buckd's $MYHOST, does
- * NOT need to match the hostname of the HTTP server!) */
+ * NOT need to match the hostname of the HTTP server!)
+ */
 #define MY_HOST "khzai.net"
+
+/* Port of your Gopher server (must match buckd's $MYPORT) */
 #define MY_PORT 70
 
+/* USE_SOCKETS
+ *
+ * If defined, connect to the Gopher server over normal sockets. This
+ * allows bucky to be used with Gopher servers other than Bucktooth.
+ *
+ * Also, due to the nature of how a webserver may run CGI scripts, there
+ * are known issues with permissions on files between the Gopher server
+ * and bucky. For most cases these are not a problem, but in the case
+ * that your Gopher server must WRITE to the filesystem things can get
+ * sticky, as bucky may not be running as the same user as your Gopher
+ * server.
+ *
+ * Therefore, even when using Bucktooth, enabling sockets may be desirable.
+ *
+ * If you do not need this functionality, leave this undefined to make use
+ * of Bucktooth's -isproxy feature instead.
+ */
 #define USE_SOCKETS
 
 /* Path to Bucktooth daemon */
