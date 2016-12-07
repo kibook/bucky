@@ -373,7 +373,7 @@ void handle_buckd(FILE *buckd, char response_type, char *selector)
 			while (handle_menu_line(buckd));
 			printf("</table>\r\n");
 		} else {
-			printf("<div class=\"queryTitle\">Enter query:</div>\r\n");
+			printf("<tt class=\"queryTitle\">Enter query:</tt>\r\n");
 			#ifdef USE_REWRITE
 				printf("<form action=\"/\">\r\n");
 			#else
