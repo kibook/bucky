@@ -321,14 +321,13 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 	int c;
 
 	char *ext = strrchr(selector, '.');
-	if (ext) {
-		++ext;
-	}
+
+	if (!ext) ext = "";
 
 	/* attempt to guess special-case MIME types from extension,
 	 * otherwise reply on the Gopher type
 	 */
-	if (strcmp(ext, "webm") == 0) {
+	if (strcmp(ext, ".webm") == 0) {
 		printf("Content-type: video/webm; charset=utf-8\r\n\r\n");
 	} else {
 		printf("Content-type: %s; charset=utf-8\r\n\r\n", mime_type(response_type));

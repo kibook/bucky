@@ -38,7 +38,7 @@
  * individual IPs of proxy users, otherwise they will all appear as the
  * server the proxy is running on.
  */
-#define USE_SOCKETS
+//#define USE_SOCKETS
 
 /* Path to Bucktooth daemon */
 #define BUCKD "/usr/local/bin/buckd"
