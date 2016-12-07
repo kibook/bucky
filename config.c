@@ -23,6 +23,8 @@ const char *mime_type_from_ext(char *ext)
 {
 	if (strcmp(ext, ".webm") == 0)
 		return "video/webm";
+	if (strcmp(ext, ".mp4") == 0)
+		return "video/mp4";
 
 	return "application/octet-stream";
 }
