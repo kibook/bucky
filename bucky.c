@@ -320,7 +320,9 @@ void handle_file(FILE *buckd, char response_type)
 {
 	int c;
 
-	printf("Content-type: %s; charset=utf-8\r\n\r\n", mime_type(response_type));
+	printf("Content-type: %s; charset=utf-8\r\n", mime_type(response_type));
+	printf("Content-disposition: inline\r\n");
+	printf("\r\n");
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
 		/* Do not show the final terminating full-stop returned by the server */
