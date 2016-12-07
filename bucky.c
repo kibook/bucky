@@ -328,12 +328,12 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 	if (response_type == GOPHER_ITEM_BINARY) {
 		ext = strrchr(selector, '.');
 		if (!ext) ext = "";
-		printf("%s", mime_type_from_ext(ext));
+		printf("%s; charset=binary", mime_type_from_ext(ext));
 	} else {
-		printf("%s", mime_type(response_type));
+		printf("%s; charset=utf-8", mime_type(response_type));
 	}
 
-	printf("; charset=utf-8\r\n\r\n");
+	printf("\r\n\r\n");
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
 		/* Do not show the final terminating full-stop returned by the server */
