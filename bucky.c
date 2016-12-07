@@ -316,13 +316,23 @@ void handle_textfile(FILE* buckd)
 }
 
 /* Files should be sent as-is with an appropriate MIME type */
-void handle_file(FILE *buckd, char response_type)
+void handle_file(FILE *buckd, char response_type, char *selector)
 {
 	int c;
 
-	printf("Content-type: %s; charset=utf-8\r\n", mime_type(response_type));
-	printf("Content-disposition: inline\r\n");
-	printf("\r\n");
+	char *ext = strrchr(selector, '.');
+	if (ext) {
+		++ext;
+	}
+
+	/* attempt to guess special-case MIME types from extension,
+	 * otherwise reply on the Gopher type
+	 */
+	if (strcmp(ext, "webm") == 0) {
+		printf("Content-type: video/webm; charset=utf-8\r\n\r\n");
+	} else {
+		printf("Content-type: %s; charset=utf-8\r\n\r\n", mime_type(response_type));
+	}
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
 		/* Do not show the final terminating full-stop returned by the server */
@@ -381,7 +391,7 @@ void handle_buckd(FILE *buckd, char response_type, char *selector)
 		printf("</body>\r\n");
 		printf("</html>\r\n");
 	} else {
-		handle_file(buckd, response_type);
+		handle_file(buckd, response_type, selector);
 	}
 }		
 
