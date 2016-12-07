@@ -138,7 +138,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("</tt>");
 	/* If the resource is external, provide a gopher:// URL */
 	} else if (strcmp(host, MY_HOST) != 0) {
-		printf("<div class=\"res ext\">");
+		printf("<tt class=\"res ext\">");
 		if (strcmp(port, DEFAULT_GOPHER_PORT) != 0) {
 			printf("<a href=\"gopher://%s:%s/%c%s\">", host, port, type, url_string);
 		} else {
@@ -147,13 +147,13 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("<img src=\"%s\"> ", gopher_item_icon(type));
 		printf("<span>%s</span>", html_display);
 		printf("</a>");
-		printf("</div>");
+		printf("</tt>");
 	/* Local resources get a relative URI.
 	 * If USE_REWRITE is enabled, this is relative to REWRITE_ROOT
 	 * otherwise, it is given as a QUERY_STRING to the CGI script
 	 */
 	} else {
-		printf("<div class=\"res\">");
+		printf("<tt class=\"res\">");
 		/* Resources with special URIs */
 		if (type == GOPHER_ITEM_TELNET) {
 			printf("<a href=\"telnet://%s:%s\">", host, port);
@@ -171,7 +171,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("<img src=\"%s\"> ", gopher_item_icon(type));
 		printf("<span>%s</span>", html_display);
 		printf("</a>");
-		printf("</div>");
+		printf("</tt>");
 	}
 
 	printf("</td></tr>\r\n");
