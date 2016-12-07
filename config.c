@@ -19,6 +19,14 @@ const char *mime_type(char type)
 	return "text/plain";
 }
 
+const char *mime_type_from_ext(char *ext)
+{
+	if (strcmp(ext, ".webm") == 0)
+		return "video/webm";
+
+	return "application/octet-stream";
+}
+
 /* Return the HTTP request path to the item type tag icon */
 const char *gopher_item_icon(char type)
 {

@@ -320,18 +320,20 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 {
 	int c;
 
-	char *ext = strrchr(selector, '.');
+	char *ext;
 
-	if (!ext) ext = "";
+	printf("Content-type: ");
 
-	/* attempt to guess special-case MIME types from extension,
-	 * otherwise reply on the Gopher type
-	 */
-	if (strcmp(ext, ".webm") == 0) {
-		printf("Content-type: video/webm; charset=utf-8\r\n\r\n");
+	/* for binary, attempt to guess the MIME type from the extension */
+	if (response_type == GOPHER_ITEM_BINARY) {
+		ext = strrchr(selector, '.');
+		if (!ext) ext = "";
+		printf("%s", mime_type_from_ext(ext));
 	} else {
-		printf("Content-type: %s; charset=utf-8\r\n\r\n", mime_type(response_type));
+		printf("%s", mime_type(response_type));
 	}
+
+	printf("; charset=utf-8\r\n\r\n");
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
 		/* Do not show the final terminating full-stop returned by the server */
