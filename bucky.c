@@ -221,7 +221,7 @@ void print_top_nav(char type, char *selector)
 
 	len = strlen(selector);
 
-	printf("<div class=\"nav\" id=\"topnav\">\r\n");
+	printf("<tt class=\"nav\" id=\"topnav\">\r\n");
 
 	if (selector[len - 1] == '/') {
 		c = len - 2;
@@ -255,7 +255,7 @@ void print_top_nav(char type, char *selector)
 	printf("/");
 	printf("</a>\r\n");
 
-	printf("</div>\r\n");
+	printf("</tt>\r\n");
 
 	printf("<hr>\r\n");
 }
@@ -269,7 +269,7 @@ void print_bottom_nav(char type, char *selector)
 
 	printf("<hr>\r\n");
 
-	printf("<div class=\"nav\" id=\"bottomnav\">\r\n");
+	printf("<tt class=\"nav\" id=\"bottomnav\">\r\n");
 
 	if (is_root) {
 		printf("<a href=\"gopher://%s\">", MY_HOST);
@@ -287,7 +287,7 @@ void print_bottom_nav(char type, char *selector)
 
 	printf("</a>\r\n");
 
-	printf("</div>\r\n");
+	printf("</tt>\r\n");
 }
 
 /* Textfiles (plain text, type 0) will have a final full-stop (.) line */

@@ -19,6 +19,7 @@ const char *mime_type(char type)
 	return "text/plain";
 }
 
+/* Try to guess MIME type from extension, otherwise fall back to application/octet-stream */
 const char *mime_type_from_ext(char *ext)
 {
 	if (strcmp(ext, ".webm") == 0)
