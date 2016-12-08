@@ -83,6 +83,9 @@
 /* Show navigational bars on the HTML page */
 #define SHOW_NAVBARS
 
+/* Display links with same font as inline text */
+#define TT_LINKS
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);

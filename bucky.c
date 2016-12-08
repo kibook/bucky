@@ -130,15 +130,27 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		}
 		printf("</tt>");
 	} else if (type == GOPHER_ITEM_ERROR) {
-		printf("<div class=\"error\">");
+		#ifdef TT_LINKS
+			printf("<tt class=\"error\">");
+		#else
+			printf("<div class=\"error\">");
+		#endif
 		printf("<nobr>");
 		printf("<img src=\"%s\"> ", gopher_item_icon(type));
 		printf("%s", html_display);
 		printf("</nobr>");
-		printf("</div>");
+		#ifdef TT_LINKS
+			printf("</tt>");
+		#else
+			printf("</div>");
+		#endif
 	/* If the resource is external, provide a gopher:// URL */
 	} else if (strcmp(host, MY_HOST) != 0) {
-		printf("<div class=\"res ext\">");
+		#ifdef TT_LINKS
+			printf("<tt class=\"res ext\">");
+		#else
+			printf("<div class=\"res ext\">");
+		#endif
 		if (strcmp(port, DEFAULT_GOPHER_PORT) != 0) {
 			printf("<a href=\"gopher://%s:%s/%c%s\">", host, port, type, url_string);
 		} else {
@@ -147,13 +159,21 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("<img src=\"%s\"> ", gopher_item_icon(type));
 		printf("<span>%s</span>", html_display);
 		printf("</a>");
-		printf("</div>");
+		#ifdef TT_LINKS
+			printf("</tt>");
+		#else
+			printf("</div>");
+		#endif
 	/* Local resources get a relative URI.
 	 * If USE_REWRITE is enabled, this is relative to REWRITE_ROOT
 	 * otherwise, it is given as a QUERY_STRING to the CGI script
 	 */
 	} else {
-		printf("<div class=\"res\">");
+		#ifdef TT_LINKS
+			printf("<tt class=\"res\">");
+		#else
+			printf("<div class=\"res\">");
+		#endif
 		/* Resources with special URIs */
 		if (type == GOPHER_ITEM_TELNET) {
 			printf("<a href=\"telnet://%s:%s\">", host, port);
@@ -171,7 +191,11 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("<img src=\"%s\"> ", gopher_item_icon(type));
 		printf("<span>%s</span>", html_display);
 		printf("</a>");
-		printf("</div>");
+		#ifdef TT_LINKS
+			printf("</tt>");
+		#else
+			printf("</div>");
+		#endif
 	}
 
 	printf("</td></tr>\r\n");
@@ -221,7 +245,11 @@ void print_top_nav(char type, char *selector)
 
 	len = strlen(selector);
 
-	printf("<div class=\"nav\" id=\"topnav\">\r\n");
+	#ifdef TT_LINKS
+		printf("<tt class=\"nav\" id=\"topnav\">\r\n");
+	#else
+		printf("<div class=\"nav\" id=\"topnav\">\r\n");
+	#endif
 
 	if (selector[len - 1] == '/') {
 		c = len - 2;
@@ -255,7 +283,11 @@ void print_top_nav(char type, char *selector)
 	printf("/");
 	printf("</a>\r\n");
 
-	printf("</div>\r\n");
+	#ifdef TT_LINKS
+		printf("</tt>\r\n");
+	#else
+		printf("</div>\r\n");
+	#endif
 
 	printf("<hr>\r\n");
 }
@@ -269,7 +301,11 @@ void print_bottom_nav(char type, char *selector)
 
 	printf("<hr>\r\n");
 
-	printf("<div class=\"nav\" id=\"bottomnav\">\r\n");
+	#ifdef TT_LINKS
+		printf("<tt class=\"nav\" id=\"bottomnav\">\r\n");
+	#else
+		printf("<div class=\"nav\" id=\"bottomnav\">\r\n");
+	#endif
 
 	if (is_root) {
 		printf("<a href=\"gopher://%s\">", MY_HOST);
@@ -287,7 +323,11 @@ void print_bottom_nav(char type, char *selector)
 
 	printf("</a>\r\n");
 
-	printf("</div>\r\n");
+	#ifdef TT_LINKS
+		printf("</tt>\r\n");
+	#else
+		printf("</div>\r\n");
+	#endif
 }
 
 /* Textfiles (plain text, type 0) will have a final full-stop (.) line */
