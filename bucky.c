@@ -118,10 +118,11 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 	/* Encode naughty characters in the URL */
 	urlstrncpy(url_string, selector, URLSTR_MAXLEN);
 
-	printf("<tr><td align=\"left\" valign=\"middle\">");
+	printf("<tr>");
 
 	/* Inline resources (info, error) */
 	if (type == GOPHER_ITEM_INFO) {
+		printf("<td></td><td align=\"left\" valign=\"middle\">");
 		printf("<tt class=\"info\">");
 		if (strcmp(html_display, "") == 0) {
 			printf("<br>");
@@ -130,15 +131,15 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		}
 		printf("</tt>");
 	} else if (type == GOPHER_ITEM_ERROR) {
+		printf("<td align=\"right\" valign=\"middle\">");
+		printf("<img src=\"%s\">", gopher_item_icon(type));
+		printf("</td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"error\">");
 		#else
 			printf("<div class=\"error\">");
 		#endif
-		printf("<nobr>");
-		printf("<img src=\"%s\"> ", gopher_item_icon(type));
-		printf("%s", html_display);
-		printf("</nobr>");
+		printf("<nobr>%s</nobr>", html_display);
 		#ifdef TT_LINKS
 			printf("</tt>");
 		#else
@@ -146,6 +147,14 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		#endif
 	/* If the resource is external, provide a gopher:// URL */
 	} else if (strcmp(host, MY_HOST) != 0) {
+		printf("<td align=\"right\" valigh=\"middle\">");
+		if (strcmp(port, DEFAULT_GOPHER_PORT) != 0) {
+			printf("<a href=\"gopher://%s:%s/%c%s\">", host, port, type, url_string);
+		} else {
+			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
+		}
+		printf("<img src=\"%s\">", gopher_item_icon(type));
+		printf("</td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res ext\">");
 		#else
@@ -156,8 +165,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
-		printf("<img src=\"%s\"> ", gopher_item_icon(type));
-		printf("<span>%s</span>", html_display);
+		printf("%s", html_display);
 		printf("</a>");
 		#ifdef TT_LINKS
 			printf("</tt>");
@@ -169,6 +177,23 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 	 * otherwise, it is given as a QUERY_STRING to the CGI script
 	 */
 	} else {
+		printf("<td align=\"right\" valign=\"middle\">");
+		/* Resources with special URIs */
+		if (type == GOPHER_ITEM_TELNET) {
+			printf("<a href=\"telnet://%s:%s\">", host, port);
+		} else if (type == GOPHER_ITEM_TN3270) {
+			printf("<a href=\"tn3270://%s:%s\">", host, port);
+		} else if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
+			printf("<a href=\"%s\">", url_string + 4);
+		} else {
+			#ifdef USE_REWRITE
+				printf("<a href=\"%s%c%s\">", REWRITE_ROOT, type, url_string);
+			#else
+				printf("<a href=\"?%c%s\">", type, url_string);
+			#endif
+		}
+		printf("<img src=\"%s\">", gopher_item_icon(type));
+		printf("</td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
 		#else
@@ -188,8 +213,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 				printf("<a href=\"?%c%s\">", type, url_string);
 			#endif
 		}
-		printf("<img src=\"%s\"> ", gopher_item_icon(type));
-		printf("<span>%s</span>", html_display);
+		printf("%s", html_display);
 		printf("</a>");
 		#ifdef TT_LINKS
 			printf("</tt>");
