@@ -154,7 +154,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
 		printf("<img src=\"%s\">", gopher_item_icon(type));
-		printf("</td><td align=\"left\" valign=\"middle\">");
+		printf("</a></td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res ext\">");
 		#else
@@ -193,7 +193,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 			#endif
 		}
 		printf("<img src=\"%s\">", gopher_item_icon(type));
-		printf("</td><td align=\"left\" valign=\"middle\">");
+		printf("</a></td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
 		#else
