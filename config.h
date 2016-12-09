@@ -86,6 +86,9 @@
 /* Display links with same font as inline text */
 #define TT_LINKS
 
+/* The root of the directory containing the item icons for each Gopher item type */
+#define GOPHER_ICON_ROOT "/gophericon"
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);

@@ -34,22 +34,22 @@ const char *mime_type_from_ext(char *ext)
 const char *gopher_item_icon(char type)
 {
 	switch (type) {
-		case GOPHER_ITEM_PLAIN_TEXT: 	return "/gophericon/icn0.gif";
-		case GOPHER_ITEM_DIRECTORY: 	return "/gophericon/icn1.gif";
-		case GOPHER_ITEM_CSO:		return "/gophericon/icn2.gif";
-		case GOPHER_ITEM_ERROR: 	return "/gophericon/icn3.gif";
-		case GOPHER_ITEM_BINHEX: 	return "/gophericon/icn4.gif";
-		case GOPHER_ITEM_DOS: 		return "/gophericon/icn5.gif";
-		case GOPHER_ITEM_UUE:		return "/gophericon/icn6.gif";
-		case GOPHER_ITEM_SEARCH: 	return "/gophericon/icn7.gif";
-		case GOPHER_ITEM_TELNET: 	return "/gophericon/icn8.gif";
-		case GOPHER_ITEM_BINARY: 	return "/gophericon/icn9.gif";
-		case GOPHER_ITEM_TN3270:	return "/gophericon/icnT.gif";
-		case GOPHER_ITEM_GIF:		return "/gophericon/icng.gif";
-		case GOPHER_ITEM_JPEG: 		return "/gophericon/icnI.gif";
-		case GOPHER_ITEM_WAV: 		return "/gophericon/icns.gif";
-		case GOPHER_ITEM_PNG: 		return "/gophericon/icnp.gif";
-		case GOPHER_ITEM_HTML: 		return "/gophericon/icnh.gif";
+		case GOPHER_ITEM_PLAIN_TEXT: 	return GOPHER_ICON_ROOT"/icn0.gif";
+		case GOPHER_ITEM_DIRECTORY: 	return GOPHER_ICON_ROOT"/icn1.gif";
+		case GOPHER_ITEM_CSO:		return GOPHER_ICON_ROOT"/icn2.gif";
+		case GOPHER_ITEM_ERROR: 	return GOPHER_ICON_ROOT"/icn3.gif";
+		case GOPHER_ITEM_BINHEX: 	return GOPHER_ICON_ROOT"/icn4.gif";
+		case GOPHER_ITEM_DOS: 		return GOPHER_ICON_ROOT"/icn5.gif";
+		case GOPHER_ITEM_UUE:		return GOPHER_ICON_ROOT"/icn6.gif";
+		case GOPHER_ITEM_SEARCH: 	return GOPHER_ICON_ROOT"/icn7.gif";
+		case GOPHER_ITEM_TELNET: 	return GOPHER_ICON_ROOT"/icn8.gif";
+		case GOPHER_ITEM_BINARY: 	return GOPHER_ICON_ROOT"/icn9.gif";
+		case GOPHER_ITEM_TN3270:	return GOPHER_ICON_ROOT"/icnT.gif";
+		case GOPHER_ITEM_GIF:		return GOPHER_ICON_ROOT"/icng.gif";
+		case GOPHER_ITEM_JPEG: 		return GOPHER_ICON_ROOT"/icnI.gif";
+		case GOPHER_ITEM_WAV: 		return GOPHER_ICON_ROOT"/icns.gif";
+		case GOPHER_ITEM_PNG: 		return GOPHER_ICON_ROOT"/icnp.gif";
+		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
 	}
 
 	return "/gophericon/icn.png";
