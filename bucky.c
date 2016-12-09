@@ -283,7 +283,7 @@ void print_top_nav(char type, char *selector)
 
 	while (selector[c] != '/' && c > 0) c--;
 
-	printf("<a id=\"navup\" ");
+	printf("<a id=\"navup\" title=\"go up a directory\" ");
 	#ifdef USE_REWRITE
 		if (strncmp(selector, "/", c) == 0) {
 			printf("href=\"%s\">", REWRITE_ROOT);
@@ -297,7 +297,7 @@ void print_top_nav(char type, char *selector)
 	printf("..");
 	printf("</a>\r\n");
 
-	printf("<a id=\"navroot\" ");
+	printf("<a id=\"navroot\" title=\"go to root of server\" ");
 	#ifdef USE_REWRITE
 		printf("href=\"%s\">", REWRITE_ROOT);
 	#else
@@ -332,9 +332,9 @@ void print_bottom_nav(char type, char *selector)
 	#endif
 
 	if (is_root) {
-		printf("<a href=\"gopher://%s\">", MY_HOST);
+		printf("<a href=\"gopher://%s\" title=\"view with Gopher client\">", MY_HOST);
 	} else {
-		printf("<a href=\"gopher://%s/%c/%s\">", MY_HOST, type, url);
+		printf("<a href=\"gopher://%s/%c/%s\" title=\"view with Gopher client\">", MY_HOST, type, url);
 	}
 
 	printf("<img src=\"%s\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
