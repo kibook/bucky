@@ -90,7 +90,7 @@
 #define GOPHER_ICON_ROOT "/gophericon"
 
 /* The icon used for URL: (HTTP) links */
-#define GOPHER_HTTP_ICON "web.gif"
+#define GOPHER_HTTP_ICON "icnhURL.gif"
 
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
