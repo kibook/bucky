@@ -89,6 +89,9 @@
 /* The root of the directory containing the item icons for each Gopher item type */
 #define GOPHER_ICON_ROOT "/gophericon"
 
+/* The icon used for URL: (HTTP) links */
+#define GOPHER_HTTP_ICON "web.gif"
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);

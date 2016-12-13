@@ -192,7 +192,13 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 				printf("<a href=\"?%c%s\">", type, url_string);
 			#endif
 		}
-		printf("<img src=\"%s\">", gopher_item_icon(type));
+
+		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
+			printf("<img src=\"%s\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+		} else {
+			printf("<img src=\"%s\">", gopher_item_icon(type));
+		}
+
 		printf("</a></td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
