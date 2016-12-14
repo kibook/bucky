@@ -95,5 +95,6 @@
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);
+const char *gopher_item_icon_alt(char type);
 
 #endif

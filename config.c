@@ -54,3 +54,28 @@ const char *gopher_item_icon(char type)
 
 	return "/gophericon/icn.png";
 }
+
+/* Return an alt text for each icon type */
+const char *gopher_item_icon_alt(char type)
+{
+	switch (type) {
+		case GOPHER_ITEM_PLAIN_TEXT:	return " ";
+		case GOPHER_ITEM_DIRECTORY:	return "/";
+		case GOPHER_ITEM_CSO:
+		case GOPHER_ITEM_SEARCH:	return "?";
+		case GOPHER_ITEM_ERROR:		return "!";
+		case GOPHER_ITEM_BINHEX:	return "hqx";
+		case GOPHER_ITEM_DOS:		return "dos";
+		case GOPHER_ITEM_UUE:		return "uue";
+		case GOPHER_ITEM_BINARY:	return "bin";
+		case GOPHER_ITEM_TN3270:	return "tn3270://";
+		case GOPHER_ITEM_TELNET:	return "telnet://";
+		case GOPHER_ITEM_GIF:		return "gif";
+		case GOPHER_ITEM_JPEG:		return "img";
+		case GOPHER_ITEM_WAV:		return "snd";
+		case GOPHER_ITEM_PNG:		return "png";
+		case GOPHER_ITEM_HTML:		return "htm";
+	}
+
+	return " ";
+}
