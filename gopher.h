@@ -20,7 +20,10 @@
 #define GOPHER_ITEM_WAV 's'
 #define GOPHER_ITEM_INFO 'i'
 #define GOPHER_ITEM_HTML 'h'
+/* These are actually from Gopher+ */
 #define GOPHER_ITEM_MOVIE ';'
+#define GOPHER_ITEM_PICTURE ':'
+#define GOPHER_ITEM_SOUND '<'
 
 #define DEFAULT_GOPHER_PORT "70"
 

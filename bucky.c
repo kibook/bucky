@@ -409,8 +409,12 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 
 	printf("Content-type: ");
 
-	/* for binary or movie, attempt to guess the MIME type from the extension */
-	if (response_type == GOPHER_ITEM_BINARY || response_type == GOPHER_ITEM_MOVIE) {
+	/* for binary and Gopher+ Picture/Movie/Sound, attempt to guess the MIME type from the extension */
+	if (response_type == GOPHER_ITEM_BINARY ||
+	    response_type == GOPHER_ITEM_MOVIE ||
+	    response_type == GOPHER_ITEM_PICTURE ||
+	    response_type == GOPHER_ITEM_SOUND)
+	{
 		ext = strrchr(selector, '.');
 		if (!ext) ext = "";
 		printf("%s; charset=binary", mime_type_from_ext(ext));
