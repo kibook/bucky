@@ -14,6 +14,7 @@ const char *mime_type(char type)
 		case GOPHER_ITEM_GIF: return "image/gif";
 		case GOPHER_ITEM_WAV: return "audio/x-wav";
 		case GOPHER_ITEM_HTML: return "text/html";
+		case GOPHER_ITEM_MOVIE: return "application/octet-stream";
 	}
 
 	return "text/plain";

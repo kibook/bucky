@@ -409,8 +409,8 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 
 	printf("Content-type: ");
 
-	/* for binary, attempt to guess the MIME type from the extension */
-	if (response_type == GOPHER_ITEM_BINARY) {
+	/* for binary or movie, attempt to guess the MIME type from the extension */
+	if (response_type == GOPHER_ITEM_BINARY || response_type == GOPHER_ITEM_MOVIE) {
 		ext = strrchr(selector, '.');
 		if (!ext) ext = "";
 		printf("%s; charset=binary", mime_type_from_ext(ext));
