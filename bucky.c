@@ -68,6 +68,9 @@ void urlstrncpy(char *url, char *str, size_t num)
 		} else if (str[i] == '\t') {
 			strncpy(url + j, "%09", 3);
 			j += 2;
+		} else if (str[i] == '#') {
+			strncpy(url + j, "%23", 3);
+			j += 2;
 		} else if (str[i] == '<') {
 			strncpy(url + j, "&lt;", 4);
 			j += 3;
