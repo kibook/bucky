@@ -51,6 +51,7 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_WAV: 		return GOPHER_ICON_ROOT"/icns.gif";
 		case GOPHER_ITEM_PNG: 		return GOPHER_ICON_ROOT"/icnp.gif";
 		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
+		case GOPHER_ITEM_MOVIE:		return GOPHER_ICON_ROOT"/icn;.gif";
 	}
 
 	return "/gophericon/icn.png";
@@ -76,6 +77,7 @@ const char *gopher_item_icon_alt(char type)
 		case GOPHER_ITEM_WAV:		return "snd";
 		case GOPHER_ITEM_PNG:		return "png";
 		case GOPHER_ITEM_HTML:		return "htm";
+		case GOPHER_ITEM_MOVIE:		return "mov";
 	}
 
 	return " ";
