@@ -54,7 +54,7 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_MOVIE:		return GOPHER_ICON_ROOT"/icn;.gif";
 	}
 
-	return "/gophericon/icn.png";
+	return GOPHER_ICON_ROOT"/icn.gif";
 }
 
 /* Return an alt text for each icon type */
