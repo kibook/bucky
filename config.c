@@ -14,6 +14,7 @@ const char *mime_type(char type)
 		case GOPHER_ITEM_GIF: return "image/gif";
 		case GOPHER_ITEM_WAV: return "audio/x-wav";
 		case GOPHER_ITEM_HTML: return "text/html";
+		case GOPHER_ITEM_PDF: return "application/pdf";
 		case GOPHER_ITEM_MOVIE: return "application/octet-stream";
 	}
 
@@ -51,6 +52,7 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_WAV: 		return GOPHER_ICON_ROOT"/icns.gif";
 		case GOPHER_ITEM_PNG: 		return GOPHER_ICON_ROOT"/icnp.gif";
 		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
+		case GOPHER_ITEM_PDF:		return GOPHER_ICON_ROOT"/icnd.gif";
 		case GOPHER_ITEM_MOVIE:		return GOPHER_ICON_ROOT"/icn;.gif";
 	}
 
@@ -77,6 +79,7 @@ const char *gopher_item_icon_alt(char type)
 		case GOPHER_ITEM_WAV:		return "snd";
 		case GOPHER_ITEM_PNG:		return "png";
 		case GOPHER_ITEM_HTML:		return "htm";
+		case GOPHER_ITEM_PDF:		return "pdf";
 		case GOPHER_ITEM_MOVIE:		return "mov";
 	}
 
