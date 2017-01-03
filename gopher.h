@@ -25,6 +25,9 @@
 #define GOPHER_ITEM_MOVIE ';'
 #define GOPHER_ITEM_PICTURE ':'
 #define GOPHER_ITEM_SOUND '<'
+/* These are from Overbite */
+#define GOPHER_ITEM_CSS 'c'
+#define GOPHER_ITEM_XML 'x'
 
 #define DEFAULT_GOPHER_PORT "70"
 

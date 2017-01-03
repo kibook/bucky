@@ -4,18 +4,20 @@
 const char *mime_type(char type)
 {
 	switch (type) {
-		case GOPHER_ITEM_PLAIN_TEXT: return "text/plain";
-		case GOPHER_ITEM_JPEG: return "image/jpeg";
-		case GOPHER_ITEM_PNG: return "image/png";
+		case GOPHER_ITEM_PLAIN_TEXT:	return "text/plain";
+		case GOPHER_ITEM_JPEG:		return "image/jpeg";
+		case GOPHER_ITEM_PNG:		return "image/png";
 		case GOPHER_ITEM_BINARY:
 		case GOPHER_ITEM_DOS:
 		case GOPHER_ITEM_UUE:
-		case GOPHER_ITEM_BINHEX: return "application/octet-stream";
-		case GOPHER_ITEM_GIF: return "image/gif";
-		case GOPHER_ITEM_WAV: return "audio/x-wav";
-		case GOPHER_ITEM_HTML: return "text/html";
-		case GOPHER_ITEM_PDF: return "application/pdf";
-		case GOPHER_ITEM_MOVIE: return "application/octet-stream";
+		case GOPHER_ITEM_BINHEX: 	return "application/octet-stream";
+		case GOPHER_ITEM_GIF: 		return "image/gif";
+		case GOPHER_ITEM_WAV: 		return "audio/x-wav";
+		case GOPHER_ITEM_HTML: 		return "text/html";
+		case GOPHER_ITEM_PDF: 		return "application/pdf";
+		case GOPHER_ITEM_MOVIE: 	return "application/octet-stream";
+		case GOPHER_ITEM_CSS: 		return "text/css";
+		case GOPHER_ITEM_XML:		return "text/xml";
 	}
 
 	return "text/plain";
@@ -54,6 +56,7 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
 		case GOPHER_ITEM_PDF:		return GOPHER_ICON_ROOT"/icnd.gif";
 		case GOPHER_ITEM_MOVIE:		return GOPHER_ICON_ROOT"/icn;.gif";
+		case GOPHER_ITEM_XML:		return GOPHER_ICON_ROOT"/icnx.gif";
 	}
 
 	return GOPHER_ICON_ROOT"/icn.gif";
@@ -81,6 +84,8 @@ const char *gopher_item_icon_alt(char type)
 		case GOPHER_ITEM_HTML:		return "htm";
 		case GOPHER_ITEM_PDF:		return "pdf";
 		case GOPHER_ITEM_MOVIE:		return "mov";
+		case GOPHER_ITEM_CSS:		return "css";
+		case GOPHER_ITEM_XML:		return "xml";
 	}
 
 	return " ";
