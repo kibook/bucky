@@ -147,7 +147,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("</tt>");
 	} else if (type == GOPHER_ITEM_ERROR) {
 		printf("<td align=\"right\" valign=\"middle\">");
-		printf("<img src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		printf("</td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"error\">");
@@ -168,7 +168,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
-		printf("<img src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		printf("</a></td><td align=\"left\" valign=\"middle\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res ext\">");
@@ -209,9 +209,9 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		}
 
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
-			printf("<img src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+			printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
 		} else {
-			printf("<img src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		}
 
 		printf("</a></td><td align=\"left\" valign=\"middle\">");
@@ -314,7 +314,7 @@ void print_top_nav(char type, char *selector)
 	#else
 		printf("href=\"?1/%.*s\">", c, selector);
 	#endif
-	printf("<img src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
 	printf("..");
 	printf("</a>\r\n");
 
@@ -324,7 +324,7 @@ void print_top_nav(char type, char *selector)
 	#else
 		printf("href=\"?\">");
 	#endif
-	printf("<img src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
 	printf("/");
 	printf("</a>\r\n");
 
@@ -358,7 +358,7 @@ void print_bottom_nav(char type, char *selector)
 		printf("<a href=\"gopher://%s/%c/%s\" title=\"view with Gopher client\">", MY_HOST, type, url);
 	}
 
-	printf("<img src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
 
 	if (is_root) {
 		printf("gopher://%s", MY_HOST);
