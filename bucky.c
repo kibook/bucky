@@ -148,7 +148,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 	} else if (type == GOPHER_ITEM_ERROR) {
 		printf("<td>");
 		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
-		printf("</td><td>");
+		printf("</td><td valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"error\">");
 		#else
@@ -169,7 +169,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
 		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
-		printf("</a></td><td>");
+		printf("</a></td><td valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res ext\">");
 		#else
@@ -214,7 +214,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		}
 
-		printf("</a></td><td>");
+		printf("</a></td><td valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
 		#else
