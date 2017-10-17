@@ -424,7 +424,7 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 
 	printf("\r\n\r\n");
 
-	if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
+	if (response_type == GOPHER_ITEM_PLAIN_TEXT || response_type == GOPHER_ITEM_XML) {
 		/* Do not show the final terminating full-stop returned by the server */
 		handle_textfile(buckd);
 	} else {
@@ -437,6 +437,7 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 /* Handle output from buckd based on the item type and selector requested */
 void handle_buckd(FILE *buckd, char response_type, char *selector)
 {
+	
 	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH) {
 		printf("Content-type: text/html; charset=utf-8\r\n\r\n");
 		printf("<html>\r\n");
@@ -448,7 +449,10 @@ void handle_buckd(FILE *buckd, char response_type, char *selector)
 			printf("<link rel=\"stylesheet\" type=\"text/css\" href=\"%s\">", EXTERNAL_CSS);
 		#endif
 
-		printf("<title></title>\r\n");
+		if (strcmp(selector, "/") == 0)
+			printf("<title>%s</title>\r\n", MY_HOST);
+		else
+			printf("<title>%s/%c/%s</title>\r\n", MY_HOST, response_type, selector);
 
 		printf("</head>\r\n");
 		printf("<body>\r\n");

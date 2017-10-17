@@ -13,7 +13,7 @@
 /* Hostname of your Gopher server (must match buckd's $MYHOST, does
  * NOT need to match the hostname of the HTTP server!)
  */
-#define MY_HOST "khzai.net"
+#define MY_HOST "khzae.net"
 
 /* Port of your Gopher server (must match buckd's $MYPORT) */
 #define MY_PORT 70
