@@ -123,7 +123,7 @@ int read_to(FILE *buckd, char str[], int n, char to)
 }
 
 /* Print a menu item as HTML */
-void print_menu_item(char type, char *display, char *selector, char *host, char *port)
+void print_menu_item(char type, char *display, char *selector, char *host, unsigned port)
 {
 	char html_display[HTMLSTR_MAXLEN], url_string[URLSTR_MAXLEN];
 
@@ -161,10 +161,10 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 			printf("</div>");
 		#endif
 	/* If the resource is external, provide a gopher:// URL */
-	} else if (strcmp(host, MY_HOST) != 0) {
+	} else if (strcmp(host, MY_HOST) != 0 || port != MY_PORT) {
 		printf("<td>");
-		if (strcmp(port, DEFAULT_GOPHER_PORT) != 0) {
-			printf("<a href=\"gopher://%s:%s/%c%s\">", host, port, type, url_string);
+		if (port != DEFAULT_GOPHER_PORT) {
+			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
@@ -175,8 +175,8 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		#else
 			printf("<div class=\"res ext\">");
 		#endif
-		if (strcmp(port, DEFAULT_GOPHER_PORT) != 0) {
-			printf("<a href=\"gopher://%s:%s/%c%s\">", host, port, type, url_string);
+		if (port != DEFAULT_GOPHER_PORT) {
+			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
@@ -195,9 +195,9 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		printf("<td>");
 		/* Resources with special URIs */
 		if (type == GOPHER_ITEM_TELNET) {
-			printf("<a href=\"telnet://%s:%s\">", host, port);
+			printf("<a href=\"telnet://%s:%d\">", host, port);
 		} else if (type == GOPHER_ITEM_TN3270) {
-			printf("<a href=\"tn3270://%s:%s\">", host, port);
+			printf("<a href=\"tn3270://%s:%d\">", host, port);
 		} else if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			printf("<a href=\"%s\">", url_string + 4);
 		} else {
@@ -222,9 +222,9 @@ void print_menu_item(char type, char *display, char *selector, char *host, char 
 		#endif
 		/* Resources with special URIs */
 		if (type == GOPHER_ITEM_TELNET) {
-			printf("<a href=\"telnet://%s:%s\">", host, port);
+			printf("<a href=\"telnet://%s:%d\">", host, port);
 		} else if (type == GOPHER_ITEM_TN3270) {
-			printf("<a href=\"tn3270://%s:%s\">", host, port);
+			printf("<a href=\"tn3270://%s:%d\">", host, port);
 		} else if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			printf("<a href=\"%s\">", url_string + 4);
 		} else {
@@ -277,7 +277,7 @@ int handle_menu_line(FILE *buckd)
 		read_to(buckd, host, HOST_MAXLEN, '\t');
 		read_to(buckd, port, PORT_MAXLEN, '\r');
 
-		print_menu_item(type, display, selector, host, port);
+		print_menu_item(type, display, selector, host, atoi(port));
 	}
 
 	while ((c = fgetc(buckd)) != '\n') if (c == EOF) break;
@@ -346,11 +346,8 @@ void print_bottom_nav(char type, char *selector)
 {
 	char url[URLSTR_MAXLEN];
 	int is_root = strcmp(selector, "/") == 0;
-	char port[PORT_MAXLEN];
 
 	urlstrncpy(url, selector, URLSTR_MAXLEN);
-
-	sprintf(port, "%d\n", MY_PORT);
 
 	printf("<hr>\r\n");
 
@@ -361,32 +358,32 @@ void print_bottom_nav(char type, char *selector)
 	#endif
 
 	if (is_root) {
-		if (strcmp(port, DEFAULT_GOPHER_PORT) == 0) {
+		if (MY_PORT == DEFAULT_GOPHER_PORT) {
 			printf("<a href=\"gopher://%s\" title=\"view with Gopher client\">", MY_HOST);
 		} else {
-			printf("<a href=\"gopher://%s:%s\" title=\"view with Gopher client\">", MY_HOST, port);
+			printf("<a href=\"gopher://%s:%d\" title=\"view with Gopher client\">", MY_HOST, MY_PORT);
 		}
 	} else {
-		if (strcmp(port, DEFAULT_GOPHER_PORT) == 0) {
+		if (MY_PORT == DEFAULT_GOPHER_PORT) {
 			printf("<a href=\"gopher://%s/%c/%s\" title=\"view with Gopher client\">", MY_HOST, type, url);
 		} else {
-			printf("<a href=\"gopher://%s:%s/%c/%s\" title=\"view with Gopher client\">", MY_HOST, port, type, url);
+			printf("<a href=\"gopher://%s:%d/%c/%s\" title=\"view with Gopher client\">", MY_HOST, MY_PORT, type, url);
 		}
 	}
 
 	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
 
 	if (is_root) {
-		if (strcmp(port, DEFAULT_GOPHER_PORT) == 0) {
+		if (MY_PORT == DEFAULT_GOPHER_PORT) {
 			printf("gopher://%s", MY_HOST);
 		} else {
-			printf("gopher://%s:%s", MY_HOST, port);
+			printf("gopher://%s:%d", MY_HOST, MY_PORT);
 		}
 	} else {
-		if (strcmp(port, DEFAULT_GOPHER_PORT) == 0) {
+		if (MY_PORT == DEFAULT_GOPHER_PORT) {
 			printf("gopher://%s/%c/%s", MY_HOST, type, url);
 		} else {
-			printf("gopher://%s:%s/%c/%s", MY_HOST, port, type, url);
+			printf("gopher://%s:%d/%c/%s", MY_HOST, MY_PORT, type, url);
 		}
 	}
 

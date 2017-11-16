@@ -29,7 +29,7 @@
 #define GOPHER_ITEM_CSS 'c'
 #define GOPHER_ITEM_XML 'x'
 
-#define DEFAULT_GOPHER_PORT "70"
+#define DEFAULT_GOPHER_PORT 70
 
 /* Limits */
 #define DISPLAY_MAXLEN 128
