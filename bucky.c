@@ -268,12 +268,17 @@ int handle_menu_line(FILE *buckd)
 		type = c;
 	}
 
-	read_to(buckd, display, DISPLAY_MAXLEN, '\t');
-	read_to(buckd, selector, SELECTOR_MAXLEN, '\t');
-	read_to(buckd, host, HOST_MAXLEN, '\t');
-	read_to(buckd, port, PORT_MAXLEN, '\r');
+	/* Ignore empty/malformed lines */
+	if (type == '\n') {
+		return 1;
+	} else if (!isspace(type)) { 
+		read_to(buckd, display, DISPLAY_MAXLEN, '\t');
+		read_to(buckd, selector, SELECTOR_MAXLEN, '\t');
+		read_to(buckd, host, HOST_MAXLEN, '\t');
+		read_to(buckd, port, PORT_MAXLEN, '\r');
 
-	print_menu_item(type, display, selector, host, port);
+		print_menu_item(type, display, selector, host, port);
+	}
 
 	while ((c = fgetc(buckd)) != '\n') if (c == EOF) break;
 
