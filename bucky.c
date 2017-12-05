@@ -210,6 +210,10 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+		#ifdef INLINE_PICS
+		} else if (type == GOPHER_ITEM_JPEG || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+			/* No icon */
+		#endif
 		} else {
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		}
@@ -234,7 +238,26 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 				printf("<a href=\"?%c%s\">", type, url_string);
 			#endif
 		}
-		printf("%s", html_display);
+		#ifdef INLINE_PICS
+			if (type == GOPHER_ITEM_JPEG || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+				#ifdef USE_REWRITE
+					printf("<img title=\"%s\" src=\"%s%c%s\"", html_display, REWRITE_ROOT,
+						type, url_string);
+				#else
+					printf("<img title=\"%s\" src=\"?%c%s\"", html_display, type, url_string);
+				#endif
+
+				#ifdef INLINE_PIC_WIDTH
+					printf(" width=\"%d\"", INLINE_PIC_WIDTH);
+				#endif
+
+				printf(">");
+			} else {
+				printf("%s", html_display);
+			}
+		#else
+			printf("%s", html_display);
+		#endif
 		printf("</a>");
 		#ifdef TT_LINKS
 			printf("</tt>");

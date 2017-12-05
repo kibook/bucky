@@ -92,6 +92,14 @@
 /* The icon used for URL: (HTTP) links */
 #define GOPHER_HTTP_ICON "icnhURL.gif"
 
+/* Show local pictures inline instead of as links */
+//#define INLINE_PICS
+
+/* Width of inline pictures in pixels (comment out to show pictures at their
+ * native size)
+ */
+//#define INLINE_PIC_WIDTH 250
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);
