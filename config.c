@@ -32,6 +32,8 @@ const char *mime_type_from_ext(char *ext)
 		return "video/mp4";
 	else if (strcmp(ext, ".pdf") == 0)
 		return "application/pdf";
+	else if (strcmp(ext, ".xml") == 0)
+		return "text/xml";
 
 	return "application/octet-stream";
 }
