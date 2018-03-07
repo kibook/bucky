@@ -34,6 +34,8 @@ const char *mime_type_from_ext(char *ext)
 		return "application/pdf";
 	else if (strcmp(ext, ".xml") == 0)
 		return "text/xml";
+	else if (strcmp(ext, ".ogg") == 0)
+		return "audio/ogg";
 
 	return "application/octet-stream";
 }
@@ -60,6 +62,8 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
 		case GOPHER_ITEM_PDF:		return GOPHER_ICON_ROOT"/icnd.gif";
 		case GOPHER_ITEM_MOVIE:		return GOPHER_ICON_ROOT"/icn;.gif";
+		case GOPHER_ITEM_SOUND:		return GOPHER_ICON_ROOT"/icn<.gif";
+		case GOPHER_ITEM_PICTURE:	return GOPHER_ICON_ROOT"/icn:.gif";
 		case GOPHER_ITEM_XML:		return GOPHER_ICON_ROOT"/icnx.gif";
 	}
 
