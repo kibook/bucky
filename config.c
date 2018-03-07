@@ -5,7 +5,7 @@ const char *mime_type(char type)
 {
 	switch (type) {
 		case GOPHER_ITEM_PLAIN_TEXT:	return "text/plain";
-		case GOPHER_ITEM_JPEG:		return "image/jpeg";
+		case GOPHER_ITEM_IMAGE:		return "image/jpeg";
 		case GOPHER_ITEM_PNG:		return "image/png";
 		case GOPHER_ITEM_BINARY:
 		case GOPHER_ITEM_DOS:
@@ -54,7 +54,7 @@ const char *gopher_item_icon(char type)
 		case GOPHER_ITEM_BINARY: 	return GOPHER_ICON_ROOT"/icn9.gif";
 		case GOPHER_ITEM_TN3270:	return GOPHER_ICON_ROOT"/icnT.gif";
 		case GOPHER_ITEM_GIF:		return GOPHER_ICON_ROOT"/icng.gif";
-		case GOPHER_ITEM_JPEG: 		return GOPHER_ICON_ROOT"/icnI.gif";
+		case GOPHER_ITEM_IMAGE:		return GOPHER_ICON_ROOT"/icnI.gif";
 		case GOPHER_ITEM_WAV: 		return GOPHER_ICON_ROOT"/icns.gif";
 		case GOPHER_ITEM_PNG: 		return GOPHER_ICON_ROOT"/icnp.gif";
 		case GOPHER_ITEM_HTML: 		return GOPHER_ICON_ROOT"/icnh.gif";
@@ -82,12 +82,14 @@ const char *gopher_item_icon_alt(char type)
 		case GOPHER_ITEM_TN3270:	return "tn3270://";
 		case GOPHER_ITEM_TELNET:	return "telnet://";
 		case GOPHER_ITEM_GIF:		return "gif";
-		case GOPHER_ITEM_JPEG:		return "img";
+		case GOPHER_ITEM_IMAGE:		return "img";
 		case GOPHER_ITEM_WAV:		return "snd";
 		case GOPHER_ITEM_PNG:		return "png";
 		case GOPHER_ITEM_HTML:		return "htm";
 		case GOPHER_ITEM_PDF:		return "pdf";
 		case GOPHER_ITEM_MOVIE:		return "mov";
+		case GOPHER_ITEM_PICTURE:	return "pic";
+		case GOPHER_ITEM_SOUND:		return "snd";
 		case GOPHER_ITEM_CSS:		return "css";
 		case GOPHER_ITEM_XML:		return "xml";
 	}

@@ -15,7 +15,7 @@
 #define GOPHER_ITEM_REDUNDANT '+'
 #define GOPHER_ITEM_TN3270 'T'
 #define GOPHER_ITEM_GIF 'g'
-#define GOPHER_ITEM_JPEG 'I'
+#define GOPHER_ITEM_IMAGE 'I'
 #define GOPHER_ITEM_PNG 'p'
 #define GOPHER_ITEM_WAV 's'
 #define GOPHER_ITEM_INFO 'i'

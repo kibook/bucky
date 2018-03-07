@@ -211,7 +211,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
 		#ifdef INLINE_PICS
-		} else if (type == GOPHER_ITEM_JPEG || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+		} else if (type == GOPHER_ITEM_IMAGE || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
 			/* No icon */
 		#endif
 		} else {
@@ -239,7 +239,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 			#endif
 		}
 		#ifdef INLINE_PICS
-			if (type == GOPHER_ITEM_JPEG || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+			if (type == GOPHER_ITEM_IMAGE || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
 				#ifdef USE_REWRITE
 					printf("<img title=\"%s\" src=\"%s%c%s\"", html_display, REWRITE_ROOT,
 						type, url_string);
