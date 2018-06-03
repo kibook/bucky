@@ -420,7 +420,7 @@ void print_bottom_nav(char type, char *selector)
 }
 
 /* Textfiles (plain text, type 0) will have a final full-stop (.) line */
-void handle_textfile(FILE* buckd)
+void handle_textfile(FILE* buckd, int esc)
 {
 	int c, i;
 	int next[3];
@@ -440,7 +440,15 @@ void handle_textfile(FILE* buckd)
 			}
 		}
 
-		putchar(c);
+		if (esc) {
+			switch (c) {
+				case '<': printf("&lt;"); break;
+				case '>': printf("&gt;"); break;
+				default: putchar(c); break;
+			}
+		} else {
+			putchar(c);
+		}
 	}
 }
 
@@ -470,7 +478,7 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT || response_type == GOPHER_ITEM_XML) {
 		/* Do not show the final terminating full-stop returned by the server */
-		handle_textfile(buckd);
+		handle_textfile(buckd, 0);
 	} else {
 		while ((c = fgetc(buckd)) != EOF) {
 			putchar(c);
@@ -481,8 +489,11 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 /* Handle output from buckd based on the item type and selector requested */
 void handle_buckd(FILE *buckd, char response_type, char *selector)
 {
-	
+	#ifdef HTML_TEXT
+	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH || response_type == GOPHER_ITEM_PLAIN_TEXT) {
+	#else
 	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH) {
+	#endif
 		printf("Content-type: text/html; charset=utf-8\r\n\r\n");
 		printf("<html>\r\n");
 		printf("<head>\r\n");
@@ -509,6 +520,12 @@ void handle_buckd(FILE *buckd, char response_type, char *selector)
 			printf("<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\r\n");
 			while (handle_menu_line(buckd));
 			printf("</table>\r\n");
+		#ifdef HTML_TEXT
+		} else if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
+			printf("<pre>");
+			handle_textfile(buckd, 1);
+			printf("</pre>");
+		#endif
 		} else {
 			printf("<tt class=\"queryTitle\">Enter query:</tt>\r\n");
 			#ifdef USE_REWRITE

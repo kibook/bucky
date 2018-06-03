@@ -100,6 +100,9 @@
  */
 //#define INLINE_PIC_WIDTH 250
 
+/* Display plain text files (type 0) as HTML pages, like menus. */
+#define HTML_TEXT
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);
