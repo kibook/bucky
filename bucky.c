@@ -356,6 +356,20 @@ void print_top_nav(char type, char *selector)
 	printf("/");
 	printf("</a>\r\n");
 
+	#ifdef HTML_TEXT
+	if (type == GOPHER_ITEM_PLAIN_TEXT) {
+		printf("<a id=\"navdl\" title=\"download\" ");
+		#ifdef USE_REWRITE
+			printf("href=\"/?DOWNLOAD=%s\">", selector);
+		#else
+			printf("href=\"?DOWNLOAD=%s\">", selector);
+		#endif
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"->\"> ", gopher_item_icon(type));
+		printf("download");
+		printf("</a>\r\n");
+	}
+	#endif
+
 	#ifdef TT_LINKS
 		printf("</tt>\r\n");
 	#else
@@ -453,7 +467,7 @@ void handle_textfile(FILE* buckd, int esc)
 }
 
 /* Files should be sent as-is with an appropriate MIME type */
-void handle_file(FILE *buckd, char response_type, char *selector)
+void handle_file(FILE *buckd, char response_type, char *selector, int download)
 {
 	int c;
 
@@ -474,7 +488,16 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 		printf("%s; charset=utf-8", mime_type(response_type));
 	}
 
-	printf("\r\n\r\n");
+	printf("\r\n");
+
+	if (download) {
+		char *fname;
+		fname = strrchr(selector, '/');
+		fname = fname ? fname + 1 : selector;
+		printf("Content-disposition: attachment; filename=\"%s\"\r\n", fname);
+	}
+
+	printf("\r\n");
 
 	if (response_type == GOPHER_ITEM_PLAIN_TEXT || response_type == GOPHER_ITEM_XML) {
 		/* Do not show the final terminating full-stop returned by the server */
@@ -487,10 +510,10 @@ void handle_file(FILE *buckd, char response_type, char *selector)
 }
 
 /* Handle output from buckd based on the item type and selector requested */
-void handle_buckd(FILE *buckd, char response_type, char *selector)
+void handle_buckd(FILE *buckd, char response_type, char *selector, int download)
 {
 	#ifdef HTML_TEXT
-	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH || response_type == GOPHER_ITEM_PLAIN_TEXT) {
+	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH || (response_type == GOPHER_ITEM_PLAIN_TEXT && !download)) {
 	#else
 	if (response_type == GOPHER_ITEM_DIRECTORY || response_type == GOPHER_ITEM_SEARCH) {
 	#endif
@@ -546,7 +569,7 @@ void handle_buckd(FILE *buckd, char response_type, char *selector)
 		printf("</body>\r\n");
 		printf("</html>\r\n");
 	} else {
-		handle_file(buckd, response_type, selector);
+		handle_file(buckd, response_type, selector, download);
 	}
 }		
 
@@ -590,6 +613,7 @@ int main(void)
 	char search_sel[SELECTOR_MAXLEN], search_params[URLSTR_MAXLEN];
 	char hs[SELECTOR_MAXLEN * 2];
 	FILE *fp;
+	int download = 0;
 
 	/* QUERY_STRING will be in the form of #/SELECTOR */
 	query_string = getenv("QUERY_STRING");
@@ -603,6 +627,16 @@ int main(void)
 		unurlstrncpy(search_params, search_q, URLSTR_MAXLEN);
 		snprintf(search_sel, SELECTOR_MAXLEN, "%s\t%s", search_res, search_params);
 		selector = search_sel;
+	#ifdef HTML_TEXT
+	/* ... or the special DOWNLOAD action (for text files displayed as HTML) */
+	} else if (strncmp(query_string, "DOWNLOAD=", 9) == 0) {
+		type = "0";
+		search_res = strtok(query_string + 9, "");
+		unurlstrncpy(search_params, search_res, URLSTR_MAXLEN);
+		snprintf(search_sel, SELECTOR_MAXLEN, "%s", search_res);
+		selector = search_sel;
+		download = 1;
+	#endif
 	} else {
 		type = strtok(query_string, "/");
 		selector = strtok(NULL, "");
@@ -614,14 +648,14 @@ int main(void)
 
 	#ifdef USE_SOCKETS
 		fp = open_socket(selector);
-		handle_buckd(fp, *type, selector);
+		handle_buckd(fp, *type, selector, download);
 		fclose(fp);
 	#else
 		/* buckd's -proxy flag takes a hex-encoded selector */
 		hexstrcpy(hs, selector);
 
 		fp = popen_buckd(hs);
-		handle_buckd(fp, *type, selector);
+		handle_buckd(fp, *type, selector, download);
 		pclose(fp);
 	#endif
 	
