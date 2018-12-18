@@ -598,10 +598,10 @@ FILE *open_socket(char *req)
 
 	connect(sockfd, (struct sockaddr *) &addr, sizeof(addr));
 
-	if (!write(sockfd, req, strlen(req))) {
+	if (write(sockfd, req, strlen(req)) == -1) {
 		return NULL;
 	}
-	if (!write(sockfd, "\r\n", 2)) {
+	if (write(sockfd, "\r\n", 2) == -1) {
 		return NULL;
 	}
 
