@@ -1,6 +1,7 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include <string.h>
 #include "gopher.h"
 
 /* CONFIGURATION
@@ -38,7 +39,7 @@
  * individual IPs of proxy users, otherwise they will all appear as the
  * server the proxy is running on.
  */
-//#define USE_SOCKETS
+/*#define USE_SOCKETS*/
 
 /* Path to Bucktooth daemon */
 #define BUCKD "/usr/local/bin/buckd"
@@ -78,7 +79,7 @@
 #define REWRITE_ROOT "/"
 
 /* Reference an external CSS file to apply custom styling */
-//#define EXTERNAL_CSS "/style.css"
+/*#define EXTERNAL_CSS "/style.css"*/
 
 /* Show navigational bars on the HTML page */
 #define SHOW_NAVBARS
@@ -93,12 +94,12 @@
 #define GOPHER_HTTP_ICON "icnhURL.gif"
 
 /* Show local pictures inline instead of as links */
-//#define INLINE_PICS
+/*#define INLINE_PICS*/
 
 /* Width of inline pictures in pixels (comment out to show pictures at their
  * native size)
  */
-//#define INLINE_PIC_WIDTH 250
+/*#define INLINE_PIC_WIDTH 250*/
 
 /* Display plain text files (type 0) as HTML pages, like menus. */
 #define HTML_TEXT

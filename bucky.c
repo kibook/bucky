@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
+#include <unistd.h>
 
 #include <sys/socket.h>
 #include <netdb.h>
@@ -22,11 +24,9 @@
  */
 void hexstrcpy(char *hs, char *str)
 {
-	size_t len, i;
+	size_t i;
 
-	len = strlen(str);
-
-	for (i = 0; i < len; i++) {
+	for (i = 0; str[i]; i++) {
 		sprintf(hs + i * 2, "%.2x", str[i]);
 	}
 }
@@ -34,10 +34,9 @@ void hexstrcpy(char *hs, char *str)
 /* Copy a string, making it HTML-safe */
 void htmlstrncpy(char *html, char *str, size_t num)
 {
-	size_t len = strlen(str);
 	size_t i, j;
 
-	for (i = 0, j = 0; i < len && j < num; i++, j++) {
+	for (i = 0, j = 0; str[i] && j < num; i++, j++) {
 		if (str[i] == '<') {
 			strncpy(html + j, "&lt;", 4);
 			j += 3;
@@ -58,10 +57,9 @@ void htmlstrncpy(char *html, char *str, size_t num)
 /* Copy a string, making it URL-safe */
 void urlstrncpy(char *url, char *str, size_t num)
 {
-	size_t len = strlen(str);
 	size_t i, j;
 
-	for (i = 0, j = 0; i < len && j < num; i++, j++) {
+	for (i = 0, j = 0; str[i] && j < num; i++, j++) {
 		if (str[i] == '?') {
 			strncpy(url + j, "%3F", 3);
 			j += 2;
@@ -88,10 +86,9 @@ void urlstrncpy(char *url, char *str, size_t num)
 /* Copy a URL-safe string, unescaping it */
 void unurlstrncpy(char *str, char *url, size_t num)
 {
-	size_t len = strlen(url);
 	size_t i, j;
 
-	for (i = 0, j = 0; i < len && j < num; ++i, ++j) {
+	for (i = 0, j = 0; str[i] && j < num; ++i, ++j) {
 		if (url[i] == '+') {
 			str[j] = ' ';
 		} else if (strncmp(url + i, "%3A", 3) == 0) {
@@ -601,8 +598,12 @@ FILE *open_socket(char *req)
 
 	connect(sockfd, (struct sockaddr *) &addr, sizeof(addr));
 
-	write(sockfd, req, strlen(req));
-	write(sockfd, "\r\n", 2);
+	if (!write(sockfd, req, strlen(req))) {
+		return NULL;
+	}
+	if (!write(sockfd, "\r\n", 2)) {
+		return NULL;
+	}
 
 	return fdopen(sockfd, "r");
 }
