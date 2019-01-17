@@ -1,4 +1,3 @@
-SOURCE=config.c bucky.c
 OUTPUT=bucky.cgi
 CFLAGS=-Wall -Wextra -pedantic-errors
 
@@ -10,8 +9,8 @@ endif
 
 all: $(OUTPUT)
 
-$(OUTPUT): $(SOURCE)
-	$(CC) $(CFLAGS) $^ -o $@
+$(OUTPUT): bucky.c config.c gopher.h config.h
+	$(CC) $(CFLAGS) -o $@ bucky.c config.c
 
 clean:
 	rm -rf $(OUTPUT)
