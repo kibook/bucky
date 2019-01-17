@@ -88,7 +88,7 @@ void unurlstrncpy(char *str, char *url, size_t num)
 {
 	size_t i, j;
 
-	for (i = 0, j = 0; str[i] && j < num; ++i, ++j) {
+	for (i = 0, j = 0; url[i] && j < num; ++i, ++j) {
 		if (url[i] == '+') {
 			str[j] = ' ';
 		} else if (strncmp(url + i, "%3A", 3) == 0) {
