@@ -46,6 +46,9 @@ void htmlstrncpy(char *html, char *str, size_t num)
 		} else if (str[i] == ' ') {
 			strncpy(html + j, "&nbsp;", 6);
 			j += 5;
+		} else if (str[i] == '"') {
+			strncpy(html + j, "&quot;", 6);
+			j += 5;
 		} else {
 			html[j] = str[i];
 		}
@@ -70,11 +73,14 @@ void urlstrncpy(char *url, char *str, size_t num)
 			strncpy(url + j, "%23", 3);
 			j += 2;
 		} else if (str[i] == '<') {
-			strncpy(url + j, "&lt;", 4);
-			j += 3;
+			strncpy(url + j, "%3C;", 3);
+			j += 2;
 		} else if (str[i] == '>') {
-			strncpy(url + j, "&gt;", 4);
-			j += 3;
+			strncpy(url + j, "%3E", 3);
+			j += 2;
+		} else if (str[i] == '"') {
+			strncpy(url + j, "%22", 3);
+			j += 2;
 		} else {
 			url[j] = str[i];
 		}
