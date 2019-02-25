@@ -140,7 +140,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 
 	/* Inline resources (info, error) */
 	if (type == GOPHER_ITEM_INFO) {
-		printf("<td></td><td>");
+		printf("<td class=\"info-icon\"></td><td class=\"info\">");
 		printf("<tt class=\"info\">");
 		if (strcmp(html_display, "") == 0) {
 			printf("<br>");
@@ -149,9 +149,9 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		}
 		printf("</tt>");
 	} else if (type == GOPHER_ITEM_ERROR) {
-		printf("<td>");
-		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
-		printf("</td><td valign=\"bottom\">");
+		printf("<td class=\"error-icon\">");
+		printf("<img class=\"icon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		printf("</td><td class=\"error\" valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"error\">");
 		#else
@@ -165,18 +165,18 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		#endif
 	/* If the resource is external, provide a gopher:// URL */
 	} else if (strcmp(host, MY_HOST) != 0 || port != MY_PORT) {
-		printf("<td>");
+		printf("<td class=\"res-icon\">");
 		if (port != DEFAULT_GOPHER_PORT) {
 			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
 		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
-		printf("</a></td><td valign=\"bottom\">");
+		printf("</a></td><td class=\"res\" valign=\"bottom\">");
 		#ifdef TT_LINKS
-			printf("<tt class=\"res ext\">");
+			printf("<tt class=\"res\">");
 		#else
-			printf("<div class=\"res ext\">");
+			printf("<div class=\"res\">");
 		#endif
 		if (port != DEFAULT_GOPHER_PORT) {
 			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
@@ -195,7 +195,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 	 * otherwise, it is given as a QUERY_STRING to the CGI script
 	 */
 	} else {
-		printf("<td>");
+		printf("<td class=\"res-icon\">");
 		/* Resources with special URIs */
 		if (type == GOPHER_ITEM_TELNET) {
 			printf("<a href=\"telnet://%s:%d\">", host, port);
@@ -221,7 +221,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
 		}
 
-		printf("</a></td><td valign=\"bottom\">");
+		printf("</a></td><td class=\"res\" valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
 		#else
