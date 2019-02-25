@@ -100,3 +100,18 @@ const char *gopher_item_icon_alt(char type)
 
 	return " ";
 }
+
+#ifdef INLINE_PICS
+/* Gopher item types to show as inline pics */
+int inline_pic(char type)
+{
+	switch (type) {
+		case GOPHER_ITEM_IMAGE:
+		case GOPHER_ITEM_PNG:
+		case GOPHER_ITEM_PICTURE:
+			return 1;
+	}
+
+	return 0;
+}
+#endif

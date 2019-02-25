@@ -214,7 +214,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
 		#ifdef INLINE_PICS
-		} else if (type == GOPHER_ITEM_IMAGE || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+		} else if (inline_pic(type)) {
 			/* No icon */
 		#endif
 		} else {
