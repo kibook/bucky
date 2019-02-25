@@ -242,7 +242,7 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 			#endif
 		}
 		#ifdef INLINE_PICS
-			if (type == GOPHER_ITEM_IMAGE || type == GOPHER_ITEM_PNG || type == GOPHER_ITEM_PICTURE) {
+			if (inline_pic(type)) {
 				#ifdef USE_REWRITE
 					printf("<img title=\"%s\" src=\"%s%c%s\"", html_display, REWRITE_ROOT,
 						type, url_string);
