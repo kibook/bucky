@@ -311,6 +311,7 @@ int handle_menu_line(FILE *buckd)
 	return 1;
 }
 
+#ifdef SHOW_NAVBARS
 /* Optional navigation bar */
 void print_top_nav(char type, char *selector)
 {
@@ -373,6 +374,8 @@ void print_top_nav(char type, char *selector)
 	}
 	#endif
 
+	custom_navbar_top(type, selector);
+
 	#ifdef TT_LINKS
 		printf("</tt>\r\n");
 	#else
@@ -429,12 +432,15 @@ void print_bottom_nav(char type, char *selector)
 
 	printf("</a>\r\n");
 
+	custom_navbar_bottom(type, selector);
+
 	#ifdef TT_LINKS
 		printf("</tt>\r\n");
 	#else
 		printf("</div>\r\n");
 	#endif
 }
+#endif
 
 /* Textfiles (plain text, type 0) will have a final full-stop (.) line */
 void handle_textfile(FILE* buckd, int esc)

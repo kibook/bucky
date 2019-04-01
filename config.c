@@ -115,3 +115,17 @@ int inline_pic(char type)
 	return 0;
 }
 #endif
+
+/* Custom content for the top navbar */
+void custom_navbar_top(char type, char *selector)
+{
+	(void) type;
+	(void) selector;
+}
+
+/* Custom content for the bottom navbar */
+void custom_navbar_bottom(char type, char *selector)
+{
+	(void) type;
+	(void) selector;
+}

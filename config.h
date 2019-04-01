@@ -111,5 +111,7 @@ const char *gopher_item_icon_alt(char type);
 #ifdef INLINE_PICS
 int inline_pic(char type);
 #endif
+void custom_navbar_top(char type, char *selector);
+void custom_navbar_bottom(char type, char *selector);
 
 #endif
