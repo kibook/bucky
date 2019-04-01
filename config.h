@@ -87,6 +87,9 @@
 /* Display links with same font as inline text */
 #define TT_LINKS
 
+/* Show icons representing item types. Otherwise, show only the alt text */
+#define GOPHER_ICONS
+
 /* The root of the directory containing the item icons for each Gopher item type */
 #define GOPHER_ICON_ROOT "/gophericon"
 

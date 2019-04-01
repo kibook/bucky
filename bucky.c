@@ -150,7 +150,15 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		printf("</tt>");
 	} else if (type == GOPHER_ITEM_ERROR) {
 		printf("<td class=\"error-icon\">");
-		printf("<img class=\"icon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		#ifdef GOPHER_ICONS
+			printf("<img class=\"icon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		#else
+			#ifdef TT_LINKS
+				printf("<tt>%s</tt>", gopher_item_icon_alt(type));
+			#else
+				printf("<div>%s</div>", gopher_item_icon_alt(type));
+			#endif
+		#endif
 		printf("</td><td class=\"error\" valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"error\">");
@@ -171,7 +179,15 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		} else {
 			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
 		}
-		printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		#ifdef GOPHER_ICONS
+			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+		#else
+			#ifdef TT_LINKS
+				printf("<tt>%s</tt>", gopher_item_icon_alt(type));
+			#else
+				printf("<div>%s</div>", gopher_item_icon_alt(type));
+			#endif
+		#endif
 		printf("</a></td><td class=\"res\" valign=\"bottom\">");
 		#ifdef TT_LINKS
 			printf("<tt class=\"res\">");
@@ -212,13 +228,29 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		}
 
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
-			printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+			#ifdef GOPHER_ICONS
+				printf("<img class=\"gicon\" src=\"%s\" alt=\"http://\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+			#else
+				#ifdef TT_LINKS
+					printf("<tt>%s</tt>", gopher_item_icon_alt(type));
+				#else
+					printf("<div>%s</div>", gopher_item_icon_alt(type));
+				#endif
+			#endif
 		#ifdef INLINE_PICS
 		} else if (inline_pic(type)) {
 			/* No icon */
 		#endif
 		} else {
-			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+			#ifdef GOPHER_ICONS
+				printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
+			#else
+				#ifdef TT_LINKS
+					printf("<tt>%s</tt>", gopher_item_icon_alt(type));
+				#else
+					printf("<div>%s</div>", gopher_item_icon_alt(type));
+				#endif
+			#endif
 		}
 
 		printf("</a></td><td class=\"res\" valign=\"bottom\">");
@@ -346,7 +378,9 @@ void print_top_nav(char type, char *selector)
 	#else
 		printf("href=\"?1/%.*s\">", c, selector);
 	#endif
-	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#ifdef GOPHER_ICONS
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#endif
 	printf("..");
 	printf("</a>\r\n");
 
@@ -356,7 +390,9 @@ void print_top_nav(char type, char *selector)
 	#else
 		printf("href=\"?\">");
 	#endif
-	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#ifdef GOPHER_ICONS
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#endif
 	printf("/");
 	printf("</a>\r\n");
 
@@ -368,7 +404,9 @@ void print_top_nav(char type, char *selector)
 		#else
 			printf("href=\"?DOWNLOAD=%s\">", selector);
 		#endif
-		printf("<img class=\"gicon\" src=\"%s\" alt=\"->\"> ", gopher_item_icon(type));
+		#ifdef GOPHER_ICONS
+			printf("<img class=\"gicon\" src=\"%s\" alt=\"->\"> ", gopher_item_icon(type));
+		#endif
 		printf("download");
 		printf("</a>\r\n");
 	}
@@ -414,7 +452,9 @@ void print_bottom_nav(char type, char *selector)
 		}
 	}
 
-	printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#ifdef GOPHER_ICONS
+		printf("<img class=\"gicon\" src=\"%s\" alt=\"/\"> ", gopher_item_icon(GOPHER_ITEM_DIRECTORY));
+	#endif
 
 	if (is_root) {
 		if (MY_PORT == DEFAULT_GOPHER_PORT) {

@@ -41,6 +41,7 @@ const char *mime_type_from_ext(char *ext)
 }
 
 /* Return the HTTP request path to the item type tag icon */
+#ifdef GOPHER_ICONS
 const char *gopher_item_icon(char type)
 {
 	switch (type) {
@@ -69,6 +70,7 @@ const char *gopher_item_icon(char type)
 
 	return GOPHER_ICON_ROOT"/icn.gif";
 }
+#endif
 
 /* Return an alt text for each icon type */
 const char *gopher_item_icon_alt(char type)
