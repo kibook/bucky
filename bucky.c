@@ -400,7 +400,7 @@ void print_top_nav(char type, char *selector)
 	if (type == GOPHER_ITEM_PLAIN_TEXT) {
 		printf("<a id=\"navdl\" title=\"download\" ");
 		#ifdef USE_REWRITE
-			printf("href=\"/?DOWNLOAD=%s\">", selector);
+			printf("href=\"%s?DOWNLOAD=%s\">", REWRITE_ROOT, selector);
 		#else
 			printf("href=\"?DOWNLOAD=%s\">", selector);
 		#endif
@@ -601,7 +601,7 @@ void handle_buckd(FILE *buckd, char response_type, char *selector, int download)
 		} else {
 			printf("<tt class=\"queryTitle\">Enter query:</tt>\r\n");
 			#ifdef USE_REWRITE
-				printf("<form action=\"/\">\r\n");
+				printf("<form action=\"%s\">\r\n", REWRITE_ROOT);
 			#else
 				printf("<form>\r\n");
 			#endif
