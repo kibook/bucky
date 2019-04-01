@@ -229,12 +229,12 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 
 		if (type == GOPHER_ITEM_HTML && strncmp(url_string, "URL:", 4) == 0) {
 			#ifdef GOPHER_ICONS
-				printf("<img class=\"gicon\" src=\"%s\" alt=\"url\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON);
+				printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", GOPHER_ICON_ROOT"/"GOPHER_HTTP_ICON, GOPHER_HTTP_ALT);
 			#else
 				#ifdef TT_LINKS
-					printf("<tt>%s</tt>", gopher_item_icon_alt(type));
+					printf("<tt>%s</tt>", GOPHER_HTTP_ALT);
 				#else
-					printf("<div>%s</div>", gopher_item_icon_alt(type));
+					printf("<div>%s</div>", GOPHER_HTTP_ALT);
 				#endif
 			#endif
 		#ifdef INLINE_PICS

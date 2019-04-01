@@ -93,8 +93,11 @@
 /* The root of the directory containing the item icons for each Gopher item type */
 #define GOPHER_ICON_ROOT "/gophericon"
 
-/* The icon used for URL: (HTTP) links */
+/* The icon used for URL: items */
 #define GOPHER_HTTP_ICON "icnhURL.gif"
+
+/* The alt text used for URL: items */
+#define GOPHER_HTTP_ALT "url"
 
 /* Show local pictures inline instead of as links */
 /*#define INLINE_PICS*/
