@@ -76,7 +76,7 @@ const char *gopher_item_icon(char type)
 const char *gopher_item_icon_alt(char type)
 {
 	switch (type) {
-		case GOPHER_ITEM_PLAIN_TEXT:	return " ";
+		case GOPHER_ITEM_PLAIN_TEXT:	return "txt";
 		case GOPHER_ITEM_DIRECTORY:	return "/";
 		case GOPHER_ITEM_CSO:
 		case GOPHER_ITEM_SEARCH:	return "?";
