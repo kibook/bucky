@@ -588,16 +588,17 @@ void handle_buckd(FILE *buckd, char response_type, char *selector, int download)
 			print_top_nav(response_type, selector);
 		#endif
 
+		#ifdef HTML_TEXT
+		if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
+			printf("<pre>");
+			handle_textfile(buckd, 1);
+			printf("</pre>");
+		} else
+		#endif
 		if (response_type == GOPHER_ITEM_DIRECTORY || strstr(selector, "\t") || strstr(selector, "?")) {
 			printf("<table border=\"0\" cellpadding=\"1\" cellspacing=\"0\">\r\n");
 			while (handle_menu_line(buckd));
 			printf("</table>\r\n");
-		#ifdef HTML_TEXT
-		} else if (response_type == GOPHER_ITEM_PLAIN_TEXT) {
-			printf("<pre>");
-			handle_textfile(buckd, 1);
-			printf("</pre>");
-		#endif
 		} else {
 			printf("<tt class=\"queryTitle\">Enter query:</tt>\r\n");
 			#ifdef USE_REWRITE
