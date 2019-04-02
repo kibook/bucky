@@ -75,7 +75,7 @@
  */
 #define USE_REWRITE
 
-/* If USE_REWRITE is defined, this if the fake 'root' */
+/* If USE_REWRITE is defined, this is the fake 'root' */
 #define REWRITE_ROOT "/"
 
 /* Reference an external CSS file to apply custom styling */
