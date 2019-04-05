@@ -665,7 +665,9 @@ int main(void)
 {
 	char *query_string, *type, *selector, *search_res, *search_q;
 	char search_sel[SELECTOR_MAXLEN], search_params[URLSTR_MAXLEN];
+	#ifndef USE_SOCKETS
 	char hs[SELECTOR_MAXLEN * 2];
+	#endif
 	FILE *fp;
 	int download = 0;
 
