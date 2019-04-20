@@ -699,6 +699,7 @@ int main(void)
 		search_res = strtok(query_string + 7, "&");
 		strtok(NULL, "=");
 		search_q = strtok(NULL, "");
+		if (!search_q) search_q = "";
 		unurlstrncpy(search_params, search_q, URLSTR_MAXLEN);
 		snprintf(search_sel, SELECTOR_MAXLEN, "%s\t%s", search_res, search_params);
 		selector = search_sel;
