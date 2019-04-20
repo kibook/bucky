@@ -293,7 +293,26 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		#else
 			printf("%s", html_display);
 		#endif
+
 		printf("</a>");
+
+		#ifdef INLINE_SEARCH
+			if (type == GOPHER_ITEM_SEARCH) {
+				printf(" ");
+
+				#ifdef USE_REWRITE
+					printf("<form class=\"search\" action=\"%s\">", REWRITE_ROOT);
+				#else
+					printf("<form class=\"search\">");
+				#endif
+				printf("<input type=\"hidden\" name=\"SEARCH\" value=\"%s\">", selector);
+				printf("<input type=\"text\" name=\"Q\"> ");
+				printf("<input type=\"submit\">");
+
+				printf("</form>");
+			}
+		#endif
+
 		#ifdef TT_LINKS
 			printf("</tt>");
 		#else
