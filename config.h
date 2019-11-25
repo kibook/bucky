@@ -114,7 +114,7 @@
 /*#define INLINE_SEARCH*/
 
 /* HTTP Gopher gateway to use for external Gopher links. */
-/*#define GOPHER_GATEWAY "http://gopher.floodgap.com/gopher/gw/"*/
+/*#define GOPHER_GATEWAY "http://gopher.floodgap.com/gopher/gw?a="*/
 
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
