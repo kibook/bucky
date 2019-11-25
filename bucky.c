@@ -174,10 +174,14 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 	/* If the resource is external, provide a gopher:// URL */
 	} else if (strcmp(host, MY_HOST) != 0 || port != MY_PORT) {
 		printf("<td class=\"res-icon\">");
+		printf("<a href=\"");
+		#ifdef GOPHER_GATEWAY
+			printf("%s", GOPHER_GATEWAY);
+		#endif
 		if (port != DEFAULT_GOPHER_PORT) {
-			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
+			printf("gopher://%s:%d/%c%s\">", host, port, type, url_string);
 		} else {
-			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
+			printf("gopher://%s/%c%s\">", host, type, url_string);
 		}
 		#ifdef GOPHER_ICONS
 			printf("<img class=\"gicon\" src=\"%s\" alt=\"%s\">", gopher_item_icon(type), gopher_item_icon_alt(type));
@@ -194,10 +198,14 @@ void print_menu_item(char type, char *display, char *selector, char *host, unsig
 		#else
 			printf("<div class=\"res\">");
 		#endif
+		printf("<a href=\"");
+		#ifdef GOPHER_GATEWAY
+			printf("%s", GOPHER_GATEWAY);
+		#endif
 		if (port != DEFAULT_GOPHER_PORT) {
-			printf("<a href=\"gopher://%s:%d/%c%s\">", host, port, type, url_string);
+			printf("gopher://%s:%d/%c%s\">", host, port, type, url_string);
 		} else {
-			printf("<a href=\"gopher://%s/%c%s\">", host, type, url_string);
+			printf("gopher://%s/%c%s\">", host, type, url_string);
 		}
 		printf("%s", html_display);
 		printf("</a>");

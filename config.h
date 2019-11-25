@@ -113,6 +113,9 @@
 /* Include forms for search items inline on menus. */
 /*#define INLINE_SEARCH*/
 
+/* HTTP Gopher gateway to use for external Gopher links. */
+/*#define GOPHER_GATEWAY "http://gopher.floodgap.com/gopher/gw/"*/
+
 const char *mime_type(char type);
 const char *mime_type_from_ext(char *ext);
 const char *gopher_item_icon(char type);
