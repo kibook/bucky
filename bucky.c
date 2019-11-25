@@ -81,9 +81,6 @@ void urlstrncpy(char *url, char *str, size_t num)
 		} else if (str[i] == '"') {
 			strncpy(url + j, "%22", 3);
 			j += 2;
-		} else if (str[i] == '/') {
-			strncpy(url + j, "%2F", 3);
-			j += 2;
 		} else {
 			url[j] = str[i];
 		}
